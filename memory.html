@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Memory tijd</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&family=Reenie+Beanie&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+      /* memory-specific styling */
+      .memory-instructions{max-width:560px;text-align:center;margin:4px 8px}
+      .memory-grid{
+        display:grid;
+        /* slightly smaller minimum so cards are more compact */
+        grid-template-columns:repeat(3, minmax(48px, 1fr));
+        gap:10px;
+        width:100%;
+        /* reduce max width so cards render smaller on larger phones */
+        max-width:420px;
+        margin:0 auto;
+        padding:6px 0 8px;
+        /* match page background so the grid blends with the screen */
+        background: #e2e2e2;
+        border-radius:10px;
+        border-color: #e2e2e2;
+        /* let the grid expand to fill available middle space; rows share remaining space */
+        grid-auto-rows: minmax(0, 1fr);
+        flex: 1 1 auto;
+        align-self:stretch;
+      }
+      .mem-card{
+        perspective:1000px;
+        width:100%;
+        aspect-ratio: 1/1;
+      }
+      .mem-card-inner{
+        position:relative;
+        width:100%;height:100%;
+        transform-style:preserve-3d;
+        transition: transform 360ms ease-in-out;
+        border-radius:14px;
+        box-shadow:0 6px 18px rgba(0,0,0,0.12);
+      }
+      .mem-card.is-flipped .mem-card-inner{transform: rotateY(180deg)}
+  .mem-card-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:14px;display:flex;align-items:center;justify-content:center}
+      .mem-card-front{background:#1f2b5b;color:#e65d3d;font-size:30px}
+      .mem-card-front img{width:100%;height:auto;display:block}
+      @media (max-width:420px){
+        .mem-card-front img{width:100%}
+      }
+      .mem-card-back{transform:rotateY(180deg);background:white;padding:6px}
+  .mem-card-back img{width:100%;height:100%;object-fit:cover;border-radius:10px}
+  /* disabled button styling for the primary button when inactive */
+  .btn[disabled], .btn.disabled{opacity:0.48;pointer-events:none;filter:grayscale(10%);cursor:not-allowed}
+  .status{margin-top:12px;text-align:center;color:#444}
+      @media (max-width:420px){
+        .memory-grid{gap:12px}
+      }
+      /* page-specific layout tweak: raise the greeting so instructions sit directly under it */
+  .center-stack.memory-top{
+    align-items:flex-start;
+    /* remove extra top padding so title moves up */
+    padding-top:0;
+    /* match the index card height so the actions align visually */
+    height: min(72vh, 920px);
+    display:grid;
+    grid-template-rows: auto 1fr auto;
+    gap:4px; /* tighten vertical gaps for this page */
+  }
+  .center-stack.memory-top .title{margin-top:-14px;margin-bottom:4px}
+  /* force main content to hug top so content sits above the button and allow grid to size it */
+  .center-stack.memory-top .main-content{display:flex;flex-direction:column;justify-content:flex-start;padding-top:0;overflow:hidden;margin-bottom:0;transform:translateY(-6px);background:#e2e2e2}
+  @media (max-width:420px){
+    .center-stack.memory-top{padding-top:0.4vh}
+    .memory-grid{gap:8px;padding:4px 0}
+  }
+  /* position the page actions similar to index: fix near the visual bottom of the centered card */
+  .memory .actions{position:fixed;left:50%;transform:translateX(-50%);z-index:999;bottom:calc((100vh - min(72vh, 920px)) / 2 + 6px + env(safe-area-inset-bottom, 0px));width:100%;max-width:320px;display:flex;justify-content:center}
+  /* smaller title specifically for the memory page */
+  .center-stack.memory-top .title{font-family: 'Reenie Beanie', cursive; font-size:clamp(40px,5.6vw,34px);font-weight:400;line-height:1;margin:0;text-align:center}
+    </style>
+  </head>
+  <body>
+    <main class="screen">
+      <div class="card">
+        <div class="center-stack memory-top">
+          <h1 class="title">Memory tijd!</h1>
+
+          <div class="main-content">
+            <p class="memory-instructions">Vind de juiste paren en denk nog eens terug aan de leuke dingen die we al samen hebben gedaan xoxo</p>
+
+            <div id="memory" class="memory-grid" aria-live="polite"></div>
+          </div>
+
+          <div class="actions">
+            <button class="btn primary disabled" id="restart" type="button" disabled>Volgende</button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      (function(){
+        const images = [
+          'assets/muis.jpeg',
+          'assets/baby.jpeg',
+          'assets/locals.jpg',
+          'assets/zee.jpg',
+          'assets/voorlinden.JPG',
+          'assets/lebron.JPG'
+        ];
+
+        const pairImages = images.concat(images); // two of each
+        const memoryEl = document.getElementById('memory');
+        const statusEl = document.getElementById('status');
+        const restartBtn = document.getElementById('restart');
+
+        let firstCard = null;
+        let secondCard = null;
+        let lock = false;
+        let matches = 0;
+
+        function shuffle(array){
+          for(let i=array.length-1;i>0;i--){
+            const j=Math.floor(Math.random()*(i+1));
+            [array[i],array[j]]=[array[j],array[i]];
+          }
+        }
+
+        function build(){
+          memoryEl.innerHTML='';
+          const cards = pairImages.slice();
+          shuffle(cards);
+          cards.forEach((src, idx)=>{
+            const card = document.createElement('div');
+            card.className='mem-card';
+            card.dataset.index = idx;
+            card.dataset.photo = src;
+
+            const inner = document.createElement('div'); inner.className='mem-card-inner';
+            const front = document.createElement('div'); front.className='mem-card-face mem-card-front';
+            const heartImg = document.createElement('img'); heartImg.src = 'assets/hartje.svg'; heartImg.alt = 'hartje';
+            front.appendChild(heartImg);
+            const back = document.createElement('div'); back.className='mem-card-face mem-card-back';
+            const img = document.createElement('img'); img.src = src; img.alt='plaatje';
+            back.appendChild(img);
+
+            inner.appendChild(front); inner.appendChild(back);
+            card.appendChild(inner);
+
+            card.addEventListener('click', onCardClick);
+            memoryEl.appendChild(card);
+          });
+          matches=0; firstCard=null; secondCard=null; lock=false;
+          if(statusEl) statusEl.textContent = 'Vind de paren!';
+          // keep the restart button inactive until the player completes the game
+          setRestartDisabled(true);
+        }
+
+        function onCardClick(e){
+          if(lock) return;
+          const card = e.currentTarget;
+          if(card.classList.contains('is-flipped') || card.classList.contains('matched')) return;
+          card.classList.add('is-flipped');
+          if(!firstCard){
+            firstCard = card; return;
+          }
+          secondCard = card;
+          lock = true;
+
+          const a = firstCard.dataset.photo;
+          const b = secondCard.dataset.photo;
+          if(a === b){
+            firstCard.classList.add('matched');
+            secondCard.classList.add('matched');
+            matches +=1;
+            resetTurn();
+            if(matches === images.length){
+              // enable the restart button once all pairs are found
+              setRestartDisabled(false);
+            }
+          } else {
+            setTimeout(()=>{
+              firstCard.classList.remove('is-flipped');
+              secondCard.classList.remove('is-flipped');
+              resetTurn();
+            }, 900);
+          }
+        }
+
+        function resetTurn(){
+          [firstCard, secondCard] = [null, null];
+          lock = false;
+        }
+
+        function setRestartDisabled(v){
+          if(v){
+            restartBtn.disabled = true;
+            restartBtn.classList.add('disabled');
+            restartBtn.setAttribute('aria-disabled','true');
+            restartBtn.tabIndex = -1;
+          } else {
+            restartBtn.disabled = false;
+            restartBtn.classList.remove('disabled');
+            restartBtn.removeAttribute('aria-disabled');
+            restartBtn.tabIndex = 0;
+          }
+        }
+
+        restartBtn.addEventListener('click', ()=>{ build(); });
+
+        // initial build
+        build();
+      })();
+    </script>
+  </body>
+</html>
