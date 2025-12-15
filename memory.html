@@ -74,7 +74,7 @@
     grid-template-rows: auto 1fr auto;
     gap:4px; /* tighten vertical gaps for this page */
     /* pull the whole stack slightly upwards */
-    margin-top: -100px;
+    margin-top: -200px;
   }
   .center-stack.memory-top .title{margin-bottom:4px}
   /* force main content to hug top so content sits above the button and allow grid to size it */
@@ -94,6 +94,8 @@
   }
   /* position the page actions similar to index: fix near the visual bottom of the centered card */
   .memory .actions{position:fixed;left:50%;transform:translateX(-50%);z-index:999;bottom:calc((100vh - min(72vh, 920px)) / 2 + 6px + env(safe-area-inset-bottom, 0px));width:100%;max-width:320px;display:flex;justify-content:center}
+  /* but hide the actions until the puzzle is complete */
+  .memory .actions{display:none}
   /* reserve space so the fixed action doesn't cover content */
   .memory{--action-space:88px}
   .center-stack.memory-top .main-content{padding-bottom:calc(var(--action-space) + env(safe-area-inset-bottom, 0px))}
@@ -114,11 +116,22 @@
           </div>
 
           <div class="actions">
-            <button class="btn primary disabled" id="restart" type="button" disabled>Volgende</button>
+            <button class="btn primary disabled" id="restart" type="button" disabled style="display:none">Volgende</button>
           </div>
         </div>
       </div>
     </main>
+
+    <!-- completion modal (hidden until all pairs found) -->
+    <div id="completedModal" class="modal" aria-hidden="true" style="display:none">
+      <div class="modal-card">
+        <h2>Joepie!</h2>
+        <p>Klaar voor het volgende spelletje?</p>
+        <div style="display:flex;gap:12px;margin-top:12px;">
+          <button id="toNext" class="btn primary">Volgende spelletje</button>
+        </div>
+      </div>
+    </div>
 
     <script>
       (function(){
@@ -201,8 +214,8 @@
             matches +=1;
             resetTurn();
             if(matches === images.length){
-              // enable the restart button once all pairs are found
-              setRestartDisabled(false);
+              // show completion modal once all pairs are found
+              showCompletedModal();
             }
           } else {
             setTimeout(()=>{
@@ -247,11 +260,40 @@
           }
         }
 
+        // modal handling: show when puzzle is finished
+        const modal = document.getElementById('completedModal');
+        const toNext = document.getElementById('toNext');
+        const closeModal = document.getElementById('closeModal');
+
+        function showCompletedModal(){
+          if(!modal) return;
+          modal.style.display = 'flex';
+          modal.setAttribute('aria-hidden','false');
+        }
+        function hideCompletedModal(){
+          if(!modal) return;
+          modal.style.display = 'none';
+          modal.setAttribute('aria-hidden','true');
+        }
+
+        if(closeModal) closeModal.addEventListener('click', ()=>{ hideCompletedModal(); });
+        if(toNext) toNext.addEventListener('click', ()=>{ 
+          // navigate to the next page (replace with your next-game URL)
+          window.location.href = 'next.html';
+        });
+
         restartBtn.addEventListener('click', ()=>{ build(); });
 
         // initial build
         build();
       })();
     </script>
+    <style>
+      /* modal styles */
+      .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.36);z-index:1200}
+      .modal-card{background:white;padding:20px;border-radius:14px;max-width:320px;text-align:center;box-shadow:0 12px 40px rgba(0,0,0,0.18)}
+      .modal-card h2{margin:0 0 8px;font-size:20px}
+      .modal-card p{margin:0;color:#555}
+    </style>
   </body>
 </html>
