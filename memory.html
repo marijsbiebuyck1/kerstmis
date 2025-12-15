@@ -94,6 +94,9 @@
   }
   /* position the page actions similar to index: fix near the visual bottom of the centered card */
   .memory .actions{position:fixed;left:50%;transform:translateX(-50%);z-index:999;bottom:calc((100vh - min(72vh, 920px)) / 2 + 6px + env(safe-area-inset-bottom, 0px));width:100%;max-width:320px;display:flex;justify-content:center}
+  /* reserve space so the fixed action doesn't cover content */
+  .memory{--action-space:88px}
+  .center-stack.memory-top .main-content{padding-bottom:calc(var(--action-space) + env(safe-area-inset-bottom, 0px))}
   /* smaller title specifically for the memory page */
   .center-stack.memory-top .title{font-family: 'Reenie Beanie', cursive; font-size:clamp(40px,5.6vw,34px);font-weight:400;line-height:1;margin:0;text-align:center}
     </style>
