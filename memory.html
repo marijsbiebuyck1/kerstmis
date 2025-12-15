@@ -15,24 +15,25 @@
         display:grid;
         /* slightly smaller minimum so cards are more compact */
         grid-template-columns:repeat(3, minmax(48px, 1fr));
-        gap:10px;
+        gap:12px; /* equal spacing between cards */
         width:100%;
         /* reduce max width so cards render smaller on larger phones */
         max-width:420px;
         margin:0 auto;
-        padding:6px 0 8px;
+        /* equal padding so left/right == top/bottom */
+        padding:12px;
         /* match page background so the grid blends with the screen */
         background: #e2e2e2;
         border-radius:10px;
-        border-color: #e2e2e2;
         /* let the grid expand to fill available middle space; rows share remaining space */
         grid-auto-rows: minmax(0, 1fr);
         flex: 1 1 auto;
         align-self:stretch;
+        box-sizing:border-box;
       }
       .mem-card{
-        perspective:1000px;
-        width:100%;
+        perspective: 1000px;
+        width:90%;
         aspect-ratio: 1/1;
         touch-action: manipulation; /* improve touch responsiveness */
       }
@@ -72,13 +73,14 @@
     display:grid;
     grid-template-rows: auto 1fr auto;
     gap:4px; /* tighten vertical gaps for this page */
+    /* pull the whole stack slightly upwards */
+    margin-top: -100px;
   }
-  .center-stack.memory-top .title{margin-top:-14px;margin-bottom:4px}
+  .center-stack.memory-top .title{margin-bottom:4px}
   /* force main content to hug top so content sits above the button and allow grid to size it */
-  .center-stack.memory-top .main-content{display:flex;flex-direction:column;justify-content:flex-start;padding-top:0;overflow:hidden;margin-bottom:0;transform:translateY(-6px);background:#e2e2e2}
+  .center-stack.memory-top .main-content{display:flex;flex-direction:column;justify-content:flex-start;align-items:center;padding-top:0;overflow:hidden;margin-bottom:0;transform:translateY(-6px);background:#e2e2e2}
   @media (max-width:420px){
-    .center-stack.memory-top{padding-top:0.4vh}
-    .memory-grid{gap:8px;padding:4px 0}
+    .memory-grid{gap:12px;padding:0px}
   }
   /* safe-area insets for iPhones */
   @supports (padding: env(safe-area-inset-top)) {
@@ -86,7 +88,7 @@
   }
   /* phone-specific tightening for iPhone 16-ish widths */
   @media (max-width: 420px){
-    .memory-grid{max-width:380px}
+    .center-stack.memory-top{padding-top:0.4vh; margin-top: -10px}
     .mem-card-front img{width:70%}
     .center-stack.memory-top .title{font-size:clamp(28px,6.5vw,34px)}
   }
