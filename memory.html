@@ -34,17 +34,21 @@
         perspective:1000px;
         width:100%;
         aspect-ratio: 1/1;
+        touch-action: manipulation; /* improve touch responsiveness */
       }
       .mem-card-inner{
         position:relative;
         width:100%;height:100%;
         transform-style:preserve-3d;
+        -webkit-transform-style:preserve-3d;
         transition: transform 360ms ease-in-out;
+        -webkit-transition: -webkit-transform 360ms ease-in-out;
         border-radius:14px;
         box-shadow:0 6px 18px rgba(0,0,0,0.12);
+        will-change: transform;
       }
-      .mem-card.is-flipped .mem-card-inner{transform: rotateY(180deg)}
-  .mem-card-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:14px;display:flex;align-items:center;justify-content:center}
+      .mem-card.is-flipped .mem-card-inner{transform: rotateY(180deg);-webkit-transform: rotateY(180deg)}
+  .mem-card-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:14px;display:flex;align-items:center;justify-content:center}
       .mem-card-front{background:#1f2b5b;color:#e65d3d;font-size:30px}
       .mem-card-front img{width:100%;height:auto;display:block}
       @media (max-width:420px){
@@ -75,6 +79,16 @@
   @media (max-width:420px){
     .center-stack.memory-top{padding-top:0.4vh}
     .memory-grid{gap:8px;padding:4px 0}
+  }
+  /* safe-area insets for iPhones */
+  @supports (padding: env(safe-area-inset-top)) {
+    .screen{padding-top: calc(12px + env(safe-area-inset-top)); padding-bottom: calc(12px + env(safe-area-inset-bottom));}
+  }
+  /* phone-specific tightening for iPhone 16-ish widths */
+  @media (max-width: 420px){
+    .memory-grid{max-width:380px}
+    .mem-card-front img{width:70%}
+    .center-stack.memory-top .title{font-size:clamp(28px,6.5vw,34px)}
   }
   /* position the page actions similar to index: fix near the visual bottom of the centered card */
   .memory .actions{position:fixed;left:50%;transform:translateX(-50%);z-index:999;bottom:calc((100vh - min(72vh, 920px)) / 2 + 6px + env(safe-area-inset-bottom, 0px));width:100%;max-width:320px;display:flex;justify-content:center}
@@ -140,6 +154,9 @@
             card.dataset.photo = src;
 
             const inner = document.createElement('div'); inner.className='mem-card-inner';
+            // ensure initial inline transform for better Safari behaviour
+            inner.style.transform = 'rotateY(0deg)';
+            inner.style.webkitTransform = 'rotateY(0deg)';
             const front = document.createElement('div'); front.className='mem-card-face mem-card-front';
             const heartImg = document.createElement('img'); heartImg.src = 'assets/hartje.svg'; heartImg.alt = 'hartje';
             front.appendChild(heartImg);
@@ -163,7 +180,8 @@
           if(lock) return;
           const card = e.currentTarget;
           if(card.classList.contains('is-flipped') || card.classList.contains('matched')) return;
-          card.classList.add('is-flipped');
+          // flip with helper to set inline transform as well (Safari fix)
+          flipCard(card, true);
           if(!firstCard){
             firstCard = card; return;
           }
@@ -183,10 +201,25 @@
             }
           } else {
             setTimeout(()=>{
-              firstCard.classList.remove('is-flipped');
-              secondCard.classList.remove('is-flipped');
+              // unflip using helper
+              flipCard(firstCard, false);
+              flipCard(secondCard, false);
               resetTurn();
             }, 900);
+          }
+        }
+
+        function flipCard(card, to){
+          const inner = card.querySelector('.mem-card-inner');
+          if(!inner) return;
+          if(to){
+            card.classList.add('is-flipped');
+            inner.style.transform = 'rotateY(180deg)';
+            inner.style.webkitTransform = 'rotateY(180deg)';
+          } else {
+            card.classList.remove('is-flipped');
+            inner.style.transform = 'rotateY(0deg)';
+            inner.style.webkitTransform = 'rotateY(0deg)';
           }
         }
 
