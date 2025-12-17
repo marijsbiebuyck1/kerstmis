@@ -1,0 +1,51 @@
+/* Styles for kc-button: orange rounded pill to match provided design */
+.kc-button {
+  background: #ea6b48;
+  color: #ffffff;
+  border: none;
+  border-radius: 9999px;
+  padding: 16px 16px;
+  font-size: clamp(13px, 3.5vw, 16px);
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1;
+  transition: background-color .12s ease, transform .06s ease, box-shadow .12s ease, opacity .08s ease;
+  box-shadow: none;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.kc-button:hover {
+  background: #e0553a;
+}
+
+.kc-button:active {
+  transform: translateY(1px);
+}
+
+.kc-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(234,107,72,0.18);
+}
+
+/* Secondary variant: red outline with red text, transparent background */
+.kc-button--secondary {
+  background: transparent;
+  color: #d32f2f; /* red text */
+  border: 2px solid #d32f2f;
+  padding: 16px 16px;
+}
+
+.kc-button--secondary:hover {
+  background: rgba(211,47,47,0.06);
+}
+
+.kc-button--secondary:active {
+  transform: translateY(1px);
+}
+
+.kc-button--secondary:focus {
+  box-shadow: 0 0 0 4px rgba(211,47,47,0.12);
+}

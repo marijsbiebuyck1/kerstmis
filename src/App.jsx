@@ -1,34 +1,26 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import Button from './components/Button.jsx'
+import SecondaryButton from './components/SecondaryButton.jsx'
+import illustratie from './assets/illustratie.svg'
+import achtergrond from './assets/achtergrond.svg'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="hero" style={{ backgroundImage: `url(${achtergrond})` }}>
+      <div className="hero-inner">
+        <h1 className="title">Allo!</h1>
+
+        <img src={illustratie} alt="Illustratie" className="illustration" />
+
+        <p className="lead">Ik wil m'n cadeautje:</p>
+
+        <div className="buttons">
+          <Button label="Opendoen" onClick={() => alert('Opengemaakt!')} />
+          <SecondaryButton label="Niet opendoen #saai" onClick={() => alert('Misschien later')} />
+        </div>
+
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </div>
   )
 }
 
