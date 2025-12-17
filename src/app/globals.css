@@ -12,6 +12,11 @@ p {
 	--bg: #E2E2E2;
 }
 
+/* Header font used across the site (loaded from index.html via Google Fonts) */
+:root{
+	--font-headers: 'Reenie Beanie', cursive;
+}
+
 html, body, #root {
 	height: 100%;
 	background-color: var(--bg);
@@ -20,5 +25,10 @@ html, body, #root {
 /* Common layout containers — keep page backgrounds consistent */
 main, section, header, footer, .card {
 	background-color: var(--bg);
+}
+
+/* Apply the handwritten display font to headings site-wide */
+h1, .title, .site-title {
+    font-family: var(--font-headers);
 }
 
