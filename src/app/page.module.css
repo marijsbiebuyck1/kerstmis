@@ -29,7 +29,8 @@ body{ background-color: var(--bg); margin:0; }
 }
 
 .title {
-	font-family: 'Reenie Beanie';
+	/* Use exact font name from Google Fonts import and provide a generic cursive fallback for mobile */
+	font-family: 'Reenie Beanie', 'Segoe Script', 'Patrick Hand', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, cursive;
 	font-size: clamp(32px, 8.5vw, 56px);
 	margin: 6px 0 10px;
 	color: #000;
