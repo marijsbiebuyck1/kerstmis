@@ -29,7 +29,7 @@ body{ background-color: var(--bg); margin:0; }
 }
 
 .title {
-	font-family: 'Reenie Beanie', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+	font-family: 'Reenie Beanie';
 	font-size: clamp(32px, 8.5vw, 56px);
 	margin: 6px 0 10px;
 	color: #000;
@@ -37,9 +37,10 @@ body{ background-color: var(--bg); margin:0; }
 }
 
 .illustration {
-	width: clamp(160px, 46vw, 260px);
-	max-width: 90%;
-	margin: 6px auto 14px;
+	/* Increased size for a more prominent illustration on hero */
+	width: clamp(200px, 60vw, 340px);
+	max-width: 100%;
+	margin: 8px auto 18px;
 	display: block;
 }
 
