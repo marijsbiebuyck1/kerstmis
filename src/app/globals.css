@@ -4,7 +4,7 @@
 /* Set global paragraph font to Nunito per request */
 p {
 	font-family: 'Nunito', 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-    font-size: 16px;
+	font-size: 16px !important;
 }
 
 /* Global background color for all pages/layouts */
