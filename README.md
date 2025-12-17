@@ -1,55 +1,16 @@
-# Kerst - Startscherm ( static )
+# React + Vite
 
-Lightweight static reproduction of the Figma `Startscherm` (node 5:12).
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Files added:
+Currently, two official plugins are available:
 
-- `index.html` — the static page using Figma-exported SVG URLs and Google Fonts.
-- `styles.css` — styling to match layout, colors and spacing from the design.
-- `dev-server.js` — zero-dependency Node dev server so `npm run dev` works.
-- `package.json` — simple manifest with `dev` script.
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-How to preview
+## React Compiler
 
-Option A — run with npm (recommended):
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-1. Make sure you have Node.js installed (v14+).
-2. From the project root (`/Users/marijsbiebuyck/Kerstcadeau`) run:
+## Expanding the ESLint configuration
 
-```bash
-npm run dev
-```
-
-3. Open http://localhost:5173 in your browser.
-
-This uses the included `dev-server.js` so you don't need to install extra packages.
-
-Option B — open `index.html` directly
-
-Open `index.html` in your browser. If the Figma asset server is running locally (as in the Figma export), images will load from `http://localhost:3845/assets/...`.
-
-If the images don't load, replace the `src` attributes in `index.html` with your local copies or public URLs.
-
-Next steps (optional):
-
-- Integrate into your app framework (React/Vue) and convert styles to your project's styling system.
-- Add small animations and accessible focus states for the buttons.
-# Kerst - Startscherm (static)
-
-Lightweight static reproduction of the Figma `Startscherm` (node 5:12).
-
-Files added:
-
-- `index.html` — the static page using Figma-exported SVG URLs and Google Fonts.
-- `styles.css` — styling to match layout, colors and spacing from the design.
-
-How to preview
-
-Open `index.html` in your browser. If the Figma asset server is available locally (as in the Figma export), images will load from `http://localhost:3845/assets/...`.
-
-If the images don't load, replace the `src` attributes in `index.html` with your local copies or public URLs.
-
-Next steps (optional):
-
-- Integrate into your app framework (React/Vue) and convert styles to your project's styling system.
-- Add small animations and accessible focus states for the buttons.
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
