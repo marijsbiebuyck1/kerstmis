@@ -10,12 +10,12 @@ export default function Brief() {
       <div className={styles.heroInner}>
         <h2 className={styles.subtitle}>Je hebt post!</h2>
 
-  <img src="/brief.svg" alt="Brief illustratie" className={styles.briefIllustration} />
+  <img src="/brieftekst.svg" alt="Brief illustratie" className={styles.briefTekst} />
 
   {/* show the footer button already present */}
   <div className={styles.memoryFooter}>
-          <Button label="Open de brief" onClick={() => {
-            window.history.pushState({}, '', '/BriefOpen')
+          <Button label="Volgende" onClick={() => {
+            window.history.pushState({}, '', '/')
             window.dispatchEvent(new Event('popstate'))
           }} />
         </div>

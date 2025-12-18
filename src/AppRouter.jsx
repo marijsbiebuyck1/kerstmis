@@ -3,6 +3,7 @@ import Page from './app/page.jsx'
 import NietOpendoen from './app/pages/NietOpendoen.jsx'
 import MemoryGame from './app/pages/MemoryGame.jsx'
 import Brief from './app/pages/brief.jsx'
+import BriefOpen from './app/pages/BriefOpen.jsx'
 
 export default function AppRouter() {
   const normalize = p => (p || '/').replace(/\/+$|^\/+/g, '/').replace(/\/$/, '') || '/'
@@ -17,5 +18,6 @@ export default function AppRouter() {
   if (path === '/niet-opendoen') return <NietOpendoen />
   if (path === '/memory') return <MemoryGame />
   if (path === '/brief') return <Brief />
+  if (path === '/BriefOpen' || path === '/briefopen' || path === '/brief-open') return <BriefOpen />
   return <Page />
 }
