@@ -62,9 +62,9 @@ export default function MemoryGame({ onFinish } = {}) {
   }
 
   return (
-    <div className={styles.hero}>
+    <div className={`${styles.hero} ${styles.memoryPage}`}>
       <div className={styles.heroInner}>
-        <h1 className={styles.title}>memory tijd</h1>
+  <h2 className={styles.subtitle}>Memory tijd</h2>
         <p className={styles.lead}>Vind de juiste paren en denk nog eens terug aan de leuke dingen die we al samen hebben gedaan xoxo</p>
 
         <div className={styles.memoryGrid}>
