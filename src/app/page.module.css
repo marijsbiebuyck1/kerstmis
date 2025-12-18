@@ -38,7 +38,7 @@ body{ background-color: var(--bg); margin:0; }
 /* smaller heading variant for subpages (Reenie Beanie but reduced size) */
 .subtitle {
 	font-family: 'Reenie Beanie', 'Segoe Script', 'Patrick Hand', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, cursive;
-	font-size: clamp(20px, 6.2vw, 36px);
+	font-size: 50px;
 	margin: 6px 0 10px;
 	color: #000;
 	line-height: 1;
@@ -126,9 +126,13 @@ body{ background-color: var(--bg); margin:0; }
 
 /* nudge the Memory page content slightly upward */
 .memoryPage .heroInner {
-	transform: translateY(-18px);
+	/* nudge more upwards so the footer button sits visually below the grid */
+	transform: translateY(-40px);
+	/* ensure enough space at the bottom so the fixed footer doesn't overlap content */
+	padding-bottom: 190px;
 }
 
 @media (max-width: 420px) {
-	.memoryPage .heroInner { transform: translateY(-10px); }
+	/* smaller nudge on phones but keep extra bottom padding */
+	.memoryPage .heroInner { transform: translateY(-24px); padding-bottom: 90px; }
 }
