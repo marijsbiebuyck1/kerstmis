@@ -95,3 +95,18 @@ body{ background-color: var(--bg); margin:0; }
  	/* keep the tight layout on very small screens */
  	.memoryGrid { column-gap: 2px; row-gap: 2px }
 }
+
+/* footer shown when the memory game is solved */
+.memoryFooter {
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 18px;
+	display: flex;
+	justify-content: center;
+	pointer-events: auto;
+	z-index: 2300;
+}
+.memoryFooter :global(.kc-button) {
+	width: min(320px, calc(100% - 40px));
+}

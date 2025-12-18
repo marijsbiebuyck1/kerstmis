@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import styles from '../page.module.css'
 import MemoryCard from '../../components/MemoryCard.js'
+import Button from '../../components/Button.jsx'
 
 const IMAGES = ['baby.jpeg','lebron.JPG','locals.JPG','muis.jpeg','voorlinden.JPG','zee.jpg']
 
@@ -15,7 +16,7 @@ function shuffle(array) {
   return a
 }
 
-export default function MemoryGame() {
+export default function MemoryGame({ onFinish } = {}) {
   // create doubled array of 12
   const [cards, setCards] = useState(() => {
     const pairs = IMAGES.concat(IMAGES)
@@ -79,6 +80,15 @@ export default function MemoryGame() {
             </div>
           ))}
         </div>
+        {cards.every(c => c.matched) && (
+          <div className={styles.memoryFooter}>
+            <Button label="Volgende" onClick={() => {
+              if (typeof onFinish === 'function') return onFinish()
+              window.history.pushState({}, '', '/')
+              window.dispatchEvent(new Event('popstate'))
+            }} />
+          </div>
+        )}
       </div>
     </div>
   )
