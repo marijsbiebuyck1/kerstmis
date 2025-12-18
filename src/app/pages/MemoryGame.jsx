@@ -84,7 +84,7 @@ export default function MemoryGame({ onFinish } = {}) {
           <div className={styles.memoryFooter}>
             <Button label="Volgende" onClick={() => {
               if (typeof onFinish === 'function') return onFinish()
-              window.history.pushState({}, '', '/')
+              window.history.pushState({}, '', '/brief')
               window.dispatchEvent(new Event('popstate'))
             }} />
           </div>
