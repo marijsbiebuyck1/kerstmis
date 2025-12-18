@@ -60,7 +60,7 @@ body{ background-color: var(--bg); margin:0; }
 .briefIllustration {
   width: 200vw;
   max-width: 100%;
-  margin: 10px auto 18px;
+  margin: 190px auto 200px;
   display: block;
   transform-origin: center top;
   will-change: transform, opacity;

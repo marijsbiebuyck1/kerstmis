@@ -6,10 +6,9 @@ import Button from '../../components/Button.jsx'
 
 export default function Brief() {
   return (
-    <div className={styles.hero}>
+    <div className={`${styles.hero} ${styles.memoryPage}`}>
       <div className={styles.heroInner}>
-        <h1 className={styles.title}>Brief</h1>
-  <p className={styles.lead}>Dit is je brief — lees het rustig en klik op Volgende wanneer je klaar bent.</p>
+        <h2 className={styles.subtitle}>Je hebt post!</h2>
 
   <img src="/brief.svg" alt="Brief illustratie" className={styles.briefIllustration} />
 
