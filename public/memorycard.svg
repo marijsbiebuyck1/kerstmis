@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="240" height="180" viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Memory card front">
+  <rect x="6" y="10" width="228" height="160" rx="12" fill="#ffffff" stroke="#d32f2f" stroke-width="4" />
+  <!-- subtle background accent -->
+  <rect x="18" y="26" width="36" height="36" rx="4" fill="#d32f2f" opacity="0.12" />
+  <rect x="78" y="26" width="36" height="36" rx="4" fill="#d32f2f" opacity="0.12" />
+  <rect x="138" y="26" width="36" height="36" rx="4" fill="#d32f2f" opacity="0.12" />
+  <!-- decorative notches -->
+  <rect x="18" y="26" width="24" height="24" rx="3" fill="#d32f2f" />
+  <rect x="78" y="26" width="24" height="24" rx="3" fill="#d32f2f" />
+  <rect x="138" y="26" width="24" height="24" rx="3" fill="#d32f2f" />
+</svg>
+<svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="100" height="100" rx="14" fill="#222B62"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M53.9443 46.1967C53.8909 46.4448 53.8047 46.4149 52.9614 49.2191C52.9146 49.3748 50.2153 56.8463 49.9888 57.236C49.8868 57.4116 49.8936 57.4111 47.0867 63.0046C46.5522 64.0696 46.6622 64.6973 46.1198 64.3689C45.7584 64.1504 44.5243 53.8281 44.3639 49.4946C44.2503 46.4277 43.8181 45.5396 43.9779 42.5866C43.9901 42.3622 43.9426 42.3735 44.072 39.778C44.0958 39.2994 44.0648 35.4998 46.6898 35.8273C48.2074 36.0166 48.7776 37.3545 49.2752 42.5934C49.439 44.3182 48.826 46.3334 49.3114 46.5474C49.3716 46.5738 49.6015 46.6753 49.778 45.8889C50.1862 44.0715 50.0669 44.0532 50.7421 42.103C51.6861 39.3763 51.5728 35.3127 54.629 35.4603C57.483 35.598 54.9465 42.5626 53.9443 46.1965V46.1967Z" fill="#E65D3D"/>
+</svg>

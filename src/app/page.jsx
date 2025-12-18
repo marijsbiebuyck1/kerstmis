@@ -17,8 +17,22 @@ export default function Page() {
         <p className={styles.lead}>Ik wil m'n cadeautje:</p>
 
         <div className={styles.buttons}>
-          <Button label="Opendoen" onClick={() => alert('Opengemaakt!')} />
-          <SecondaryButton label="Niet opendoen #saai" onClick={() => alert('Misschien later')} />
+          <Button
+            label="Opendoen"
+            onClick={() => {
+              window.history.pushState({}, '', '/memory')
+              window.dispatchEvent(new Event('popstate'))
+            }}
+          />
+          <SecondaryButton
+            label="Niet opendoen #saai"
+            onClick={() => {
+              // navigate to the new page using history API and notify router
+              window.history.pushState({}, '', '/niet-opendoen')
+              // dispatch a generic popstate event (some mobile browsers don't support PopStateEvent constructor)
+              window.dispatchEvent(new Event('popstate'))
+            }}
+          />
         </div>
 
       </div>

@@ -29,6 +29,10 @@ main, section, header, footer, .card {
 
 /* Apply the handwritten display font to headings site-wide */
 h1, .title, .site-title {
-    font-family: var(--font-headers);
+	font-family: var(--font-headers);
+	/* Make the handwriting font appear slightly lighter */
+	font-weight: 300;
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
 }
 
