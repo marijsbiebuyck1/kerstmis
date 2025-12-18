@@ -58,16 +58,25 @@ body{ background-color: var(--bg); margin:0; }
 
 /* Memory game grid */
 .memoryGrid {
-	display: grid;
-	grid-template-columns: repeat(4, minmax(0, 1fr));
-	gap: 12px;
-	margin-top: 14px;
+ 	display: grid;
+ 	/* 3 columns x 4 rows layout for 12 cards */
+ 	grid-template-columns: repeat(3, minmax(0, 1fr));
+ 	/* very tight gap between columns and rows */
+ 	column-gap: 2px !important;
+ 	row-gap: 2px;
+ 	margin-top: 14px;
 }
 
 .memoryCardContainer {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	/* make the card container fill the grid cell and let the card itself stretch to the full width
+	   so the visible gap between cards is the grid's column-gap/row-gap */
+	display: block;
+}
+
+/* ensure the mc-card (button) stretches to the full width of the grid cell */
+.memoryCardContainer :global(.mc-card) {
+  display: block;
+  width: 100%;
 }
 
 .buttons :global(.kc-button) {
@@ -81,6 +90,8 @@ body{ background-color: var(--bg); margin:0; }
 }
 
 @media (max-width: 420px) {
-	.title { font-size: clamp(30px, 9.5vw, 46px) }
-	.buttons :global(.kc-button) { width: 88% }
+ 	.title { font-size: clamp(30px, 9.5vw, 46px) }
+ 	.buttons :global(.kc-button) { width: 88% }
+ 	/* keep the tight layout on very small screens */
+ 	.memoryGrid { column-gap: 2px; row-gap: 2px }
 }

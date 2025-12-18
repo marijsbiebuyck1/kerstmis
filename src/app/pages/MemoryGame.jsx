@@ -70,7 +70,7 @@ export default function MemoryGame() {
           {cards.map((card, i) => (
             <div className={styles.memoryCardContainer} key={card.id}>
               <MemoryCard
-                width={120}
+                width={'100%'}
                 height={100}
                 backImage={card.image}
                 isFlipped={card.flipped || card.matched}
