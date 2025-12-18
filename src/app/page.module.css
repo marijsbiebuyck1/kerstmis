@@ -38,7 +38,7 @@ body{ background-color: var(--bg); margin:0; }
 /* smaller heading variant for subpages (Reenie Beanie but reduced size) */
 .subtitle {
 	font-family: 'Reenie Beanie', 'Segoe Script', 'Patrick Hand', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, cursive;
-	font-size: clamp(20px, 6.2vw, 36px);
+	font-size: 50px;
 	margin: 6px 0 10px;
 	color: #000;
 	line-height: 1;
@@ -60,7 +60,7 @@ body{ background-color: var(--bg); margin:0; }
 .briefIllustration {
   width: 200vw;
   max-width: 100%;
-  margin: 190px auto 200px;
+  margin: 150px auto 170px;
   display: block;
   transform-origin: center top;
   will-change: transform, opacity;
