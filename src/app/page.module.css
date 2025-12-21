@@ -147,14 +147,100 @@ body{ background-color: var(--bg); margin:0; }
 
 /* footer shown when the memory game is solved */
 .memoryFooter {
-	position: fixed;
-	left: 0;
-	right: 0;
-	bottom: 18px;
-	display: flex;
-	justify-content: center;
-	pointer-events: auto;
-	z-index: 2300;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 18px;
+  display: flex;
+  justify-content: center;
+  pointer-events: auto;
+  z-index: 2300;
+}
+.memoryFooter :global(.kc-button) {
+  width: min(320px, calc(100% - 40px));
+}
+
+/* Maretak page specific styles */
+.maretakIllustration {
+	width: clamp(240px, 60vw, 520px);
+	max-width: 60%;
+	/* reduce surrounding whitespace so the mistletoe sits closer to the heading/content */
+	margin: 6px auto 6px;
+  display: block;
+}
+
+.maretakPeople {
+	position: relative;
+	/* reduce the vertical footprint of the side characters so the maretak occupies less empty space */
+	height: 220px;
+	margin-top: 6px;
+	margin-bottom: 80px;
+}
+
+.maretLeft, .maretRight {
+  position: absolute;
+  bottom: 0;
+  width: 260px;
+  max-width: 46%;
+}
+
+.maretLeft {
+  left: -18%;
+}
+
+.maretRight {
+  right: -18%;
+}
+
+@media (max-width: 420px) {
+  .maretakPeople { height: 160px; margin-bottom: 90px }
+  .maretLeft, .maretRight { width: 140px }
+  .maretLeft { left: -24% }
+  .maretRight { right: -24% }
+}
+
+/* Make the maretak page fit one viewport on small phones (iPhone sizes) */
+@media (max-width: 430px) {
+	.maretakPage .heroInner {
+		max-width: 360px;
+		padding-bottom: 70px; /* reduce bottom spacing so footer fits */
+		transform: translateY(-6px); /* small nudge up */
+	}
+
+	.maretakPage .subtitle {
+		font-size: clamp(28px, 8vw, 34px);
+		margin-bottom: 6px;
+	}
+
+	.maretakPage .lead {
+		font-size: 14px;
+		margin-bottom: 6px;
+	}
+
+	.maretakIllustration {
+		width: clamp(170px, 42vw, 260px);
+		margin: 8px auto 4px;
+	}
+
+	.maretakPeople {
+		height: 120px;
+		margin-bottom: 70px;
+	}
+
+	.maretLeft, .maretRight { width: 120px }
+	.maretLeft { left: -28% }
+	.maretRight { right: -28% }
+
+	/* Ensure footer is slightly higher to avoid overlap on tiny screens */
+	.memoryFooter { bottom: 12px }
+}
+
+/* Also try to contain within short heights (landscape phones) */
+@media (max-height: 820px) and (max-width: 480px) {
+	.maretakPage .heroInner { padding-bottom: 70px; transform: translateY(0) }
+	.maretakPage .subtitle { font-size: 26px }
+	.maretakIllustration { width: 160px; margin-top: 6px }
+	.maretakPeople { height: 100px; margin-bottom: 60px }
 }
 .memoryFooter :global(.kc-button) {
 	width: min(320px, calc(100% - 40px));
