@@ -9,14 +9,13 @@ export default function Brief() {
   return (
     <div className={`${styles.hero} ${styles.memoryPage}`}>
       <div className={styles.heroInner}>
-        <h2 className={styles.subtitle}>Je hebt post!</h2>
 
         <BriefCard />
 
         {/* show the footer button already present */}
         <div className={styles.memoryFooter}>
           <Button label="Volgende" onClick={() => {
-            window.history.pushState({}, '', '/')
+            window.history.pushState({}, '', '/maretak')
             window.dispatchEvent(new Event('popstate'))
           }} />
         </div>

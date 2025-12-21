@@ -15,7 +15,7 @@ export default function Brief() {
   {/* show the footer button already present */}
   <div className={styles.memoryFooter}>
           <Button label="Open de brief" onClick={() => {
-            window.history.pushState({}, '', '/maretak')
+            window.history.pushState({}, '', '/BriefOpen')
             window.dispatchEvent(new Event('popstate'))
           }} />
         </div>
