@@ -11,6 +11,7 @@ import MaretakThree from './app/pages/maretak-3.jsx'
 import MaretakFour from './app/pages/maretak-4.jsx'
 import MaretakFive from './app/pages/maretak-5.jsx'
 import Einde from './app/pages/Einde.jsx'
+import Kiss from './app/pages/Kiss.jsx'
 
 
 export default function AppRouter() {
@@ -33,6 +34,7 @@ export default function AppRouter() {
   if (path === '/maretak-3' || path === '/Maretak-3') return <MaretakThree />
   if (path === '/maretak-4' || path === '/Maretak-4') return <MaretakFour />
   if (path === '/maretak-5' || path === '/Maretak-5') return <MaretakFive />
-  if (path === '/Einde' || path === '/Einde') return <Einde />
+  if (path === '/einde' || path === '/Einde') return <Einde />
+  if (path === '/kiss' || path === '/Kiss') return <Kiss />
   return <Page />
 }

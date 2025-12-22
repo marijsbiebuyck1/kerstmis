@@ -20,6 +20,7 @@ export default function Page() {
           <Button
             label="Marijs een kusje geven"
             onClick={() => {
+              window.history.pushState({}, '', '/Kiss')
               window.dispatchEvent(new Event('popstate'))
             }}
           />
