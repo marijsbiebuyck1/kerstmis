@@ -60,8 +60,8 @@ body{ background-color: var(--bg); margin:0; }
 /* illustration used on the brief page between subtitle and footer */
 .briefIllustration {
   width: 200vw;
-  max-width: 100%;
-  margin: 100px auto 100px;
+  max-width: 80%;
+  margin: 100px auto;
   display: block;
   transform-origin: center top;
   will-change: transform, opacity;
