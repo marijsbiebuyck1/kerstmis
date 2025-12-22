@@ -70,9 +70,9 @@ export default function MemoryGame({ onFinish } = {}) {
         <div className={styles.memoryGrid}>
           {cards.map((card, i) => (
             <div className={styles.memoryCardContainer} key={card.id}>
-              <MemoryCard
-                width={'100%'}
-                height={100}
+        <MemoryCard
+          width={'100%'}
+          height={'100%'}
                 backImage={card.image}
                 isFlipped={card.flipped || card.matched}
                 onRequestFlip={() => handleCardClick(i)}

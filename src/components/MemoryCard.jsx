@@ -12,8 +12,9 @@ import './MemoryCard.css'
  * - randomize: boolean - if true pick a random back image on first flip
  */
 export default function MemoryCard({
-  width = 160,
-  height = 120,
+  // let the grid/container determine size by default; use 100% to fill the cell
+  width = '100%',
+  height = '100%',
   
   className = '',
   title = 'Memory card',

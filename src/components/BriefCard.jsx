@@ -27,7 +27,7 @@ export default function BriefCard() {
             Merry Christmas, love you &lt;3
           </p>
 
-          <p className={styles.signature}>
+          <p>
             Je Kapoentje, Marijs
           </p>
         </div>
